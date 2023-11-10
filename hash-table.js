@@ -59,6 +59,29 @@ class HashTable {
 
   insert(key, value) {
     // Your code here
+    let node = new KeyValuePair(key, value);
+    let location = this.hashMod(key);
+    if (this.data[location] === null) {
+      this.data[location] = node;
+      this.count++;
+    } else {
+      let head = this.data[location];
+      let same = false;
+      while (head != null) {
+        if (head.key === key) {
+          head.value = value;
+          same = true;
+          break;
+        }
+        head = head.next;
+      }
+      if (!same) {
+        node.next = this.data[location];
+        this.data[location] = node;
+
+        this.count++;
+      }
+    }
   }
 }
 
