@@ -35,6 +35,7 @@ class HashTable {
     // Your code here
     let node = new KeyValuePair(key, value);
     let location = this.hashMod(key);
+
     if (this.data[location] === null) {
       this.data[location] = node;
       this.count++;
@@ -45,6 +46,15 @@ class HashTable {
 
   insertWithHashCollisions(key, value) {
     // Your code here
+    let node = new KeyValuePair(key, value);
+    let location = this.hashMod(key);
+    if (this.data[location] === null) {
+      this.data[location] = node;
+    } else {
+      node.next = this.data[location];
+      this.data[location] = node;
+    }
+    this.count++;
   }
 
   insert(key, value) {
