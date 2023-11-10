@@ -22,7 +22,6 @@ class HashTable {
   hash(key) {
     // Your code here
     let keyToSHA256 = sha256(key);
-    console.log(keyToSHA256);
     let res = parseInt(keyToSHA256.substring(0, 8), 16);
     return res;
   }
@@ -34,6 +33,14 @@ class HashTable {
 
   insertNoCollisions(key, value) {
     // Your code here
+    let node = new KeyValuePair(key, value);
+    let location = this.hashMod(key);
+    if (this.data[location] === null) {
+      this.data[location] = node;
+      this.count++;
+    } else {
+      throw new Error('hash collision or same key/value pair already exists!');
+    }
   }
 
   insertWithHashCollisions(key, value) {
